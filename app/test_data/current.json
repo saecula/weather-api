@@ -8,14 +8,8 @@
     "current": {
         "temperature": 57,
         "feels_like": 53.7,
-        "condition": "Clear",
         "humidity": 69,
-        "wind_speed": 14.8,
-        "wind_direction": "NE",
-        "pressure": 30.14,
-        "visibility": 9,
-        "cloud_cover": 0,
-        "uv_index": 0
+        "pressure": 30.14
     },
     "units": "imperial",
     "provider": "weatherapi",

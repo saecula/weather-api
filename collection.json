@@ -1,0 +1,254 @@
+{
+	"info": {
+		"_postman_id": "bffcdb40-f5a8-4cdc-8013-b299a03aa681",
+		"name": "Weather API",
+		"description": "just an MVP weather api aggregator service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6189220"
+	},
+	"item": [
+		{
+			"name": "providers",
+			"item": [
+				{
+					"name": "openweathermap",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.openweathermap.org/data/3.0/onecall?appid={{openweather_api_key}}&lat={{latitude}}&lon={{longitude}}",
+							"protocol": "https",
+							"host": [
+								"api",
+								"openweathermap",
+								"org"
+							],
+							"path": [
+								"data",
+								"3.0",
+								"onecall"
+							],
+							"query": [
+								{
+									"key": "exclude",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "appid",
+									"value": "{{openweather_api_key}}"
+								},
+								{
+									"key": "lat",
+									"value": "{{latitude}}"
+								},
+								{
+									"key": "lon",
+									"value": "{{longitude}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "weatherapi",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.weatherapi.com/v1/current.json?q=Boston&key=f2b08f6b77944abc98444224250110",
+							"protocol": "https",
+							"host": [
+								"api",
+								"weatherapi",
+								"com"
+							],
+							"path": [
+								"v1",
+								"current.json"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "Boston"
+								},
+								{
+									"key": "key",
+									"value": "f2b08f6b77944abc98444224250110"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "noaa",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "noaa gridpoints",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ping",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/health",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "current openWeatherMap",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/v1/current?location=Boston&provider=openweathermap",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"current"
+					],
+					"query": [
+						{
+							"key": "location",
+							"value": "Boston"
+						},
+						{
+							"key": "provider",
+							"value": "openweathermap"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "current weatherAPI",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/v1/current?location=Boston&provider=openweathermap",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"current"
+					],
+					"query": [
+						{
+							"key": "location",
+							"value": "Boston"
+						},
+						{
+							"key": "provider",
+							"value": "openweathermap"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "current noaa",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/v1/current?lat={{latitude}}&lon={{longitude}}&provider=noaa&units=metric",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"v1",
+						"current"
+					],
+					"query": [
+						{
+							"key": "lat",
+							"value": "{{latitude}}"
+						},
+						{
+							"key": "lon",
+							"value": "{{longitude}}"
+						},
+						{
+							"key": "provider",
+							"value": "noaa"
+						},
+						{
+							"key": "units",
+							"value": "metric"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

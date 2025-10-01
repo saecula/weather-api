@@ -1,27 +1,3 @@
-## what I prioritized
-
-normalized weather data 
-useful time formats
-realistic deployment environment
-flexibility adding new providers
-
-## tradeoffs
-
-interesting weather data 
-clean-coded time formats
-realistic deployment process
-geocoding support / allow querying by city or address 
-    - Would be nice but immediately introduces constraints via cost (if using Google Maps) or rate limits (if using OpenStreetMap)
-
-## what I'd do next
-
-- thorough unit tests per provider, particulary for the normalization stage, testing several known responses from each
-- set up cicd with cloud build or github actions
-- convert to TypeScript once POC finished; add type safety for query params like provider enum
-- add some endpoints that use historical data: compare accuracy across providers, find outlier current weather, etc
-- clean up import paths
-
-
 # Weather API
 
 this service provides a way to interact with many different weather APIs. 
@@ -38,13 +14,53 @@ this service provides a way to interact with many different weather APIs.
 
 ## Hosting
 
-This service is deployed on GCP in order to emulate what a full-fledged production scenario deployment might look like. It runs as a Cloud Run service with a minimum scaling of 1, which will cost a little bit but want to make sure it's fast when demoing.
+This service is deployed on GCP in a personal project (`saecula`) in order to emulate what a full-fledged production scenario deployment might look like. It runs as a Cloud Run service with a minimum scaling of 1, which will cost a little bit but want to make sure it's fast when demoing.
 
+UI for service details(edit, deploy, metrics):
+- https://console.cloud.google.com/run/detail/us-west1/weather-api/observability/metrics?project=saecula
 
-○ Where it’s hosted and why
-○ How to scale it up/down on that platform
-○ Basic cost considerations (rough order-of-magnitude is fine)
-○ How you’d roll back a bad deploy
+UI for stopping the service:
+- https://console.cloud.google.com/run?project=saecula -- select weather-api
 
-### How to Deploy
-gcloud run services update SERVICE_NAME --image=IMAGE_URL
+Cost estimate: 
+- https://cloud.google.com/products/calculator?_gl=1*zjdllm*_ga*NTEyNDM1Njg2LjE3NTkzMjY1NTU.*_ga_WH2QY8WWF5*czE3NTkzMzQ2MTIkbzE0JGcxJHQxNzU5MzQxMzE5JGo0MyRsMCRoMA..&hl=en&dl=CjhDaVExTlRRMU5qTXhaUzA0WWpNNUxUUTRZakF0WW1KaU1DMWpOMkU0WXpZd1lqUmtaallRQVE9PRAcGiQyMzIyMTM3NS1BMUU1LTRFQUMtQTQ3OS01RTJBRkNBQzk2N0M
+- a bit pricey because I wanted it to be ready for demo (min replicas at 1 instead of 0)
+
+How I'd roll back a bad deploy:
+- currently would just select a previous image hash or tag in the Cloud Run UI. ideally would do this via gcloud cli but dont know how currently. am more familiar with k8s rollbacks but implementing k8s here was out of scope.
+
+# Notes
+
+## what I prioritized
+
+tidy code structure
+normalized weather data
+useful time formats
+useful temperature units
+realistic deployment environment
+optimized for adding new providers, standard inputs (lat/lon)
+
+## tradeoffs
+
+tests
+interesting weather data 
+clean-coded time formats
+clean-coded temperature units
+realistic deployment process
+geocoding support / allow querying by city or address 
+    - Would be nice but immediately introduces constraints via cost (if using Google Maps) or rate limits (if using OpenStreetMap)
+
+## miss
+
+- forgot fallback provider
+
+## what I'd do next
+
+- get actual current-weather from noaa instead of placeholder (first found among grid points)
+- more thorough error logging / handling
+- thorough unit tests per provider, particulary for the normalization stage, testing several known responses from each, several units / times
+- add forecast endpoint with minute/hour/day options
+- set up cicd with cloud build or github actions
+- convert to TypeScript once POC finished; add type safety for query params like provider enum
+- clean up import paths
+- log by full query instead of individual params

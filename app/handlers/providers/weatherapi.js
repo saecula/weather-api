@@ -2,18 +2,12 @@ import axios from 'axios';
 
 const BASE_URL = 'https://api.weatherapi.com/v1/current.json';
 
-/**
- * Fetches current weather from WeatherAPI
- */
-export const fetchCurrent = async (location, apiKey) => {
-    const url = `${BASE_URL}?key=${apiKey}&q=${encodeURIComponent(location)}`;
+export const fetchCurrent = async (lat, lon, apiKey) => {
+    const url = `${BASE_URL}?q=${lat},${lon}&key=${apiKey}`;
     const response = await axios.get(url);
     return response.data;
 };
 
-/**
- * Normalizes WeatherAPI response to standard format
- */
 export const normalizeCurrent = (data, units = 'imperial') => {
     return {
         location: {
