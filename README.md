@@ -24,11 +24,11 @@ UI for stopping the service:
 - https://console.cloud.google.com/run?project=saecula -- select weather-api
 
 Cost estimate: 
-- https://cloud.google.com/products/calculator?_gl=1*zjdllm*_ga*NTEyNDM1Njg2LjE3NTkzMjY1NTU.*_ga_WH2QY8WWF5*czE3NTkzMzQ2MTIkbzE0JGcxJHQxNzU5MzQxMzE5JGo0MyRsMCRoMA..&hl=en&dl=CjhDaVExTlRRMU5qTXhaUzA0WWpNNUxUUTRZakF0WW1KaU1DMWpOMkU0WXpZd1lqUmtaallRQVE9PRAcGiQyMzIyMTM3NS1BMUU1LTRFQUMtQTQ3OS01RTJBRkNBQzk2N0M
-- a bit pricey because I wanted it to be ready for demo
+- https://cloud.google.com/products/calculator?_gl=1*zjdllm*_ga*NTEyNDM1Njg2LjE3NTkzMjY1NTU.*_ga_WH2QY8WWF5*czE3NTkzMzQ2MTIkbzE0JGcxJHQxNzU5MzQxMzE5JGo0MyRsMCRoMA..&hl=en&dl=CjhDaVF6WldZMU9HSmxOeTAwWkdabExUUmtOakF0WVRJNU5TMWhPVGxsWmpnME56ZzNaakVRQVE9PRAcGiQyMzIyMTM3NS1BMUU1LTRFQUMtQTQ3OS01RTJBRkNBQzk2N0M
 
 How I'd roll back a bad deploy:
-- currently would just select a previous image hash or tag in the Cloud Run UI. ideally would have standard commands ready via gcloud cli
+- https://cloud.google.com/run/docs/rollouts-rollbacks-traffic-migration#rollback
+- currently would just select a previous revision in the Cloud Run UI. ideally would have standard commands ready via gcloud cli or have a pipeline with a ready rollback button
 
 # Notes
 
