@@ -1,33 +1,41 @@
-import { fetchFromProvider, fetchFromMultipleProviders } from './providers/index.js';
-import { config, cache, logger } from '../config.js';
+import { fetchFromProvider } from './providers/index.js';
+import { config } from '../config.js';
+import cache from '../util/cache.js';
+import logger from '../util/logger.js';
 
 /**
  * GET /weather/current
  * Query params:
  *   - location: City name (required)
- *   - provider: Specific provider to use (optional, defaults to all available)
+ *   - provider: Specific provider to use (optional, defaults to weatherapi)
  *   - units: 'imperial' or 'metric' (optional, defaults to 'imperial')
  */
 const getCurrentWeather = async (req, res) => {
     const WEATHERAPI_API_KEY = config.weatherapi.apiKey;
     const OPENWEATHERMAP_API_KEY = config.openweathermap.apiKey;
-    
+
     const { location, provider, units = 'imperial' } = req.query;
 
     if (!location) {
         return res.status(400).json({ error: 'Location parameter is required' });
     }
 
+    const validProviders = ['weatherapi', 'openweathermap'];
+    const selectedProvider = provider || (WEATHERAPI_API_KEY ? 'weatherapi' : 'openweathermap');
+
+    if (!validProviders.includes(selectedProvider)) {
+        return res.status(400).json({ error: `Invalid provider. Valid options are: ${validProviders.join(', ')}` });
+    }
+
     // Check cache
-    const cacheKey = { location, provider, units };
+    const cacheKey = `${location}_${provider}_${units}`;
     const cached = cache.get(cacheKey);
     if (cached) {
+        logger.info('Cache hit', { cacheKey });
         return res.json({ ...cached, cached: true });
     }
 
     try {
-        // Single provider request
-        if (provider) {
             const apiKey = provider === 'openweathermap' ? OPENWEATHERMAP_API_KEY : WEATHERAPI_API_KEY;
 
             if (!apiKey) {
@@ -37,31 +45,11 @@ const getCurrentWeather = async (req, res) => {
             }
 
             const data = await fetchFromProvider(provider, location, apiKey, units);
+
+            cache.set(cacheKey, data);
+
+            logger.info('Fetched weather data', { location, provider, units });
             return res.json(data);
-        }
-
-        // Multiple providers request
-        const providerConfigs = [];
-        if (WEATHERAPI_API_KEY) {
-            providerConfigs.push({ name: 'weatherapi', apiKey: WEATHERAPI_API_KEY });
-        }
-        if (OPENWEATHERMAP_API_KEY) {
-            providerConfigs.push({ name: 'openweathermap', apiKey: OPENWEATHERMAP_API_KEY });
-        }
-
-        if (providerConfigs.length === 0) {
-            return res.status(500).json({ error: 'No weather API keys configured' });
-        }
-
-        const { successful, failed } = await fetchFromMultipleProviders(providerConfigs, location, units);
-
-        res.json({
-            location,
-            units,
-            providers: successful,
-            errors: failed.length > 0 ? failed : undefined
-        });
-
     } catch (error) {
         logger.error('Failed to fetch weather data', {
             location,

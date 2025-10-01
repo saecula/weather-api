@@ -1,6 +1,6 @@
+import dotenv from 'dotenv';
 import express from 'express';
 import { rateLimit } from 'express-rate-limit';
-import dotenv from 'dotenv';
 
 import routes from './routes.js';
 
@@ -17,10 +17,10 @@ app.use(express.json());
 
 app.use(limiter);
 
-app.use('/api/v1', routes);
+app.use('/v1', routes);
 
 app.get('/', (req, res) => {
-    res.json({ ok: true, message: 'Hello from Weather API', uptime: process.uptime() });
+    res.json({ ok: true, message: 'Hello from Weather API', serviceVersion: 'v1', uptime: process.uptime() });
 });
 
 app.get('/health', (req, res) => {

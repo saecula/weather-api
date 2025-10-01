@@ -1,12 +1,14 @@
 import * as openweathermap from './openweathermap.js';
 import * as weatherapi from './weatherapi.js';
+import * as noaa from './noaa.js';
 
 /**
  * Registry of all available weather providers
  */
 const providers = {
     openweathermap,
-    weatherapi
+    weatherapi,
+    noaa
 };
 
 /**
@@ -49,12 +51,6 @@ export const fetchFromMultipleProviders = async (providerConfigs, location, unit
     return { successful, failed };
 };
 
-/**
- * Gets list of available provider names
- */
 export const getAvailableProviders = () => Object.keys(providers);
 
-/**
- * Checks if a provider is available
- */
 export const isProviderAvailable = (providerName) => providerName in providers;

@@ -3,8 +3,7 @@
         "lat": 42.3583,
         "lon": -71.0603,
         "name": "Boston",
-        "country": "US",
-        "timezone": "America/New_York"
+        "country": "US"
     },
     "current": {
         "temperature": 57,
@@ -20,5 +19,7 @@
     },
     "units": "imperial",
     "provider": "weatherapi",
-    "updated_at": "2025-10-01T02:30:00Z"
+    "timestamp": "2025-10-01T14:00:00Z",
+    "timezone": "America/New_York",
+    "local_time": "2025-10-01T10:00:00-04:00"
 }

@@ -20,8 +20,7 @@ export const normalizeCurrent = (data, units = 'imperial') => {
             lat: data.location.lat,
             lon: data.location.lon,
             name: data.location.name,
-            country: data.location.country,
-            timezone: data.location.tz_id
+            country: data.location.country
         },
         current: {
             temperature: units === 'imperial' ? data.current.temp_f : data.current.temp_c,
@@ -37,6 +36,8 @@ export const normalizeCurrent = (data, units = 'imperial') => {
         },
         units,
         provider: 'weatherapi',
-        updated_at: new Date(data.current.last_updated_epoch * 1000).toISOString()
+        timestamp: new Date(data.current.last_updated_epoch * 1000).toISOString(),
+        timezone: data.location.tz_id,
+        local_time: data.location.localtime
     };
 };
