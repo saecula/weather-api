@@ -53,7 +53,7 @@ geocoding support / allow querying by city or address
 
 ## miss
 
-- forgot fallback provider
+- did not finish fallback provider
 
 ## what I'd do next
 
