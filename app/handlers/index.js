@@ -33,6 +33,7 @@ const getCurrentWeather = async (req, res) => {
 
     const provider = selectedProvider || (OPENWEATHERMAP_API_KEY ? 'openweathermap' : 'weatherapi');
 
+    // could think more about this
     const cacheKey = `${lat},${lon}_${provider}_${units}`;
     const cached = cache.get(cacheKey);
 

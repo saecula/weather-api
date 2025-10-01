@@ -132,70 +132,12 @@
 			"response": []
 		},
 		{
-			"name": "current openWeatherMap",
+			"name": "current weather",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/api/v1/current?location=Boston&provider=openweathermap",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"api",
-						"v1",
-						"current"
-					],
-					"query": [
-						{
-							"key": "location",
-							"value": "Boston"
-						},
-						{
-							"key": "provider",
-							"value": "openweathermap"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "current weatherAPI",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{url}}/api/v1/current?location=Boston&provider=openweathermap",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"api",
-						"v1",
-						"current"
-					],
-					"query": [
-						{
-							"key": "location",
-							"value": "Boston"
-						},
-						{
-							"key": "provider",
-							"value": "openweathermap"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "current noaa",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{url}}/v1/current?lat={{latitude}}&lon={{longitude}}&provider=noaa&units=metric",
+					"raw": "{{url}}/v1/current?lat={{latitude}}&lon={{longitude}}&provider=noaa&units=imperial",
 					"host": [
 						"{{url}}"
 					],
@@ -214,11 +156,13 @@
 						},
 						{
 							"key": "provider",
-							"value": "noaa"
+							"value": "noaa",
+							"description": "options: openweathermap, weatherapi, noaa"
 						},
 						{
 							"key": "units",
-							"value": "metric"
+							"value": "imperial",
+							"description": "options: imperial, metric"
 						}
 					]
 				}

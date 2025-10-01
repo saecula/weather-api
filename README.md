@@ -11,6 +11,7 @@ this service provides a way to interact with many different weather APIs.
 ### Quickstart
 - `npm i`
 - `npm run dev`
+- import Postman collection: `collection.json`
 
 ## Hosting
 
@@ -24,10 +25,10 @@ UI for stopping the service:
 
 Cost estimate: 
 - https://cloud.google.com/products/calculator?_gl=1*zjdllm*_ga*NTEyNDM1Njg2LjE3NTkzMjY1NTU.*_ga_WH2QY8WWF5*czE3NTkzMzQ2MTIkbzE0JGcxJHQxNzU5MzQxMzE5JGo0MyRsMCRoMA..&hl=en&dl=CjhDaVExTlRRMU5qTXhaUzA0WWpNNUxUUTRZakF0WW1KaU1DMWpOMkU0WXpZd1lqUmtaallRQVE9PRAcGiQyMzIyMTM3NS1BMUU1LTRFQUMtQTQ3OS01RTJBRkNBQzk2N0M
-- a bit pricey because I wanted it to be ready for demo (min replicas at 1 instead of 0)
+- a bit pricey because I wanted it to be ready for demo
 
 How I'd roll back a bad deploy:
-- currently would just select a previous image hash or tag in the Cloud Run UI. ideally would do this via gcloud cli but dont know how currently. am more familiar with k8s rollbacks but implementing k8s here was out of scope.
+- currently would just select a previous image hash or tag in the Cloud Run UI. ideally would have standard commands ready via gcloud cli
 
 # Notes
 
@@ -48,7 +49,7 @@ clean-coded time formats
 clean-coded temperature units
 realistic deployment process
 geocoding support / allow querying by city or address 
-    - Would be nice but immediately introduces constraints via cost (if using Google Maps) or rate limits (if using OpenStreetMap)
+    - Would be nice but introduces constraints via cost (if using Google Maps) or possibly rate limits
 
 ## miss
 
@@ -59,8 +60,5 @@ geocoding support / allow querying by city or address
 - get actual current-weather from noaa instead of placeholder (first found among grid points)
 - more thorough error logging / handling
 - thorough unit tests per provider, particulary for the normalization stage, testing several known responses from each, several units / times
-- add forecast endpoint with minute/hour/day options
-- set up cicd with cloud build or github actions
-- convert to TypeScript once POC finished; add type safety for query params like provider enum
-- clean up import paths
+- convert to TypeScript; add type safety for query params like provider enum
 - log by full query instead of individual params

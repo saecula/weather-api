@@ -23,7 +23,6 @@ export const fetchFromProvider = async (providerName, opts) => {
 
     const provider = providerModules[providerName];
 
-    // Call provider with appropriate parameters based on whether it needs an API key
     const rawData = providerConfig.requiresApiKey
         ? await provider.fetchCurrent(lat, lon, providerConfig.apiKey, units)
         : await provider.fetchCurrent(lat, lon, units);
