@@ -1,5 +1,5 @@
 import { fetchFromProvider, fetchFromMultipleProviders } from './providers/index.js';
-import { config, cache } from '../config.js';
+import { config, cache, logger } from '../config.js';
 
 /**
  * GET /weather/current
@@ -63,13 +63,18 @@ const getCurrentWeather = async (req, res) => {
         });
 
     } catch (error) {
-        console.error('Error fetching weather data:', error);
+        logger.error('Failed to fetch weather data', {
+            location,
+            provider,
+            units,
+            error: error.message
+        });
         res.status(500).json({ error: 'Failed to fetch weather data', details: error.message });
     }
 }
 
 const getForecast = (req, res) => {
-    console.log('hi hello forecast')
+    logger.debug('Forecast endpoint called')
     res.json({
         location: 'San Francisco',
         forecast: [

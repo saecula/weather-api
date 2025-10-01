@@ -61,3 +61,46 @@ class Cache {
 }
 
 export const cache = new Cache();
+
+// Simple structured logger
+class Logger {
+    constructor() {
+        this.level = process.env.LOG_LEVEL || 'info';
+        this.levels = { error: 0, warn: 1, info: 2, debug: 3 };
+    }
+
+    _shouldLog(level) {
+        return this.levels[level] <= this.levels[this.level];
+    }
+
+    _log(level, message, meta = {}) {
+        if (!this._shouldLog(level)) return;
+
+        const entry = {
+            timestamp: new Date().toISOString(),
+            level,
+            message,
+            ...meta
+        };
+
+        console.log(JSON.stringify(entry));
+    }
+
+    error(message, meta) {
+        this._log('error', message, meta);
+    }
+
+    warn(message, meta) {
+        this._log('warn', message, meta);
+    }
+
+    info(message, meta) {
+        this._log('info', message, meta);
+    }
+
+    debug(message, meta) {
+        this._log('debug', message, meta);
+    }
+}
+
+export const logger = new Logger();

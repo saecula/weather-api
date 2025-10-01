@@ -37,3 +37,4 @@ this service provides a way to interact with many different weather APIs.
 ○ Basic cost considerations (rough order-of-magnitude is fine)
 ○ How you’d roll back a bad deploy
 ### How to Deploy
+gcloud run services update SERVICE_NAME --image=IMAGE_URL

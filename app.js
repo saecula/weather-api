@@ -1,10 +1,14 @@
 import express from 'express';
 import { rateLimit } from 'express-rate-limit';
+import dotenv from 'dotenv';
+
 import routes from './routes.js';
 
+dotenv.config();
+
 const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000,
-    max: 5,
+    windowMs: process.env.RATE_LIMIT_WINDOW_MS ? parseInt(process.env.RATE_LIMIT_WINDOW_MS) : 15 * 60 * 1000,
+    max: process.env.RATE_LIMIT_MAX ? parseInt(process.env.RATE_LIMIT_MAX) : 100,
 });
 
 const app = express();
