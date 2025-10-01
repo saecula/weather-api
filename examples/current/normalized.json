@@ -1,0 +1,24 @@
+{
+    "location": {
+        "lat": 42.3583,
+        "lon": -71.0603,
+        "name": "Boston",
+        "country": "US",
+        "timezone": "America/New_York"
+    },
+    "current": {
+        "temperature": 57,
+        "feels_like": 53.7,
+        "condition": "Clear",
+        "humidity": 69,
+        "wind_speed": 14.8,
+        "wind_direction": "NE",
+        "pressure": 30.14,
+        "visibility": 9,
+        "cloud_cover": 0,
+        "uv_index": 0
+    },
+    "units": "imperial",
+    "provider": "weatherapi",
+    "updated_at": "2025-10-01T02:30:00Z"
+}

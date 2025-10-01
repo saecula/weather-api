@@ -1,6 +1,5 @@
 import express from 'express';
 import { rateLimit } from 'express-rate-limit';
-
 import routes from './routes.js';
 
 const limiter = rateLimit({
