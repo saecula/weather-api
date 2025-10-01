@@ -42,6 +42,7 @@ const getCurrentWeather = async (req, res) => {
         return res.json({ ...cached, cached: true });
     }
 
+    // todo: make a for/of loop over a list of all providers as fallbacks
     try {
         const data = await fetchFromProvider(currentProvider, { lat, lon, units });
 
@@ -66,7 +67,7 @@ const getCurrentWeather = async (req, res) => {
         logger.error('Failed to fetch weather data upon fallback', {
             lat,
             lon,
-            provider,
+            currentProvider,
             units,
             error: error.message
         });

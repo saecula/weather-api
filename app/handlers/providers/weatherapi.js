@@ -1,7 +1,9 @@
 import axios from 'axios';
 
 const BASE_URL = 'https://api.weatherapi.com/v1/current.json';
+// get api key here instead of param
 
+// todo: normalize fetch and normalize signatures
 export const fetchCurrent = async (lat, lon, apiKey) => {
     const url = `${BASE_URL}?q=${lat},${lon}&key=${apiKey}`;
     const response = await axios.get(url);

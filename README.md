@@ -34,21 +34,21 @@ How I'd roll back a bad deploy:
 
 ## what I prioritized
 
-tidy code structure
-normalized weather data
-useful time formats
-useful temperature units
-realistic deployment environment
-optimized for adding new providers, standard inputs (lat/lon)
+- tidy code structure
+- normalized weather data
+- useful time formats
+- useful temperature units
+- realistic deployment environment
+- optimized for adding new providers, standard inputs (lat/lon)
 
 ## tradeoffs
 
-tests
-interesting weather data 
-clean-coded time formats
-clean-coded temperature units
-realistic deployment process
-geocoding support / allow querying by city or address 
+- tests
+- interesting weather data 
+- clean-coded time formats
+- clean-coded temperature units
+- realistic deployment process
+- geocoding support / allow querying by city or address 
     - Would be nice but introduces constraints via cost (if using Google Maps) or possibly rate limits
 
 ## what I'd do next

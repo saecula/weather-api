@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const BASE_URL = 'https://api.weather.gov/points';
 
+// todo: normalize fetch and normalize signatures
 export const fetchCurrent = async (lat, lon, units = 'imperial') => {
     try {
         // get point metadata

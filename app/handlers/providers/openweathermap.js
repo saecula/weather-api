@@ -1,7 +1,9 @@
 import axios from 'axios';
 
 const BASE_URL = 'https://api.openweathermap.org/data/3.0/onecall';
+// get api key here instead of param
 
+// todo: normalize fetch and normalize signatures
 export const fetchCurrent = async (lat, lon, apiKey, units = 'imperial') => {
     const url = `${BASE_URL}?appid=${apiKey}&lat=${lat}&lon=${lon}&units=${units}`;
     const response = await axios.get(url);
