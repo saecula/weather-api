@@ -31,10 +31,10 @@ const getCurrentWeather = async (req, res) => {
         return res.status(400).json({ error: `Invalid provider. Valid options are: ${validProviders.join(', ')}` });
     }
 
-    const provider = selectedProvider || (OPENWEATHERMAP_API_KEY ? 'openweathermap' : 'weatherapi');
+    const currentProvider = selectedProvider || (OPENWEATHERMAP_API_KEY ? 'openweathermap' : 'weatherapi');
 
     // could think more about this
-    const cacheKey = `${lat},${lon}_${provider}_${units}`;
+    const cacheKey = `${lat},${lon}_${currentProvider}_${units}`;
     const cached = cache.get(cacheKey);
 
     if (cached) {
@@ -43,14 +43,27 @@ const getCurrentWeather = async (req, res) => {
     }
 
     try {
-        const data = await fetchFromProvider(provider, { lat, lon, units });
+        const data = await fetchFromProvider(currentProvider, { lat, lon, units });
 
         cache.set(cacheKey, data);
-        logger.info('Fetched weather data', { lat, lon, provider, units });
-
+        logger.info('Fetched weather data', { lat, lon, currentProvider, units });
         return res.json(data);
+
     } catch (error) {
-        logger.error('Failed to fetch weather data', {
+        logger.warn('Primary provider failed, attempting fallback', { error: error.message });
+    }
+
+    try {
+        const fallbackProvider = currentProvider === 'openweathermap' || currentProvider === 'noaa' ? 'weatherapi' : 'openweathermap';
+
+        const data = await fetchFromProvider(fallbackProvider, { lat, lon, units });
+
+        cache.set(cacheKey, data);
+        logger.info('Fetched fallback weather data', { lat, lon, currentProvider, units });
+        return res.json({ data, isFallback: true, fallbackProvider });
+
+    } catch (error) {
+        logger.error('Failed to fetch weather data upon fallback', {
             lat,
             lon,
             provider,

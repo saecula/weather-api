@@ -51,10 +51,6 @@ realistic deployment process
 geocoding support / allow querying by city or address 
     - Would be nice but introduces constraints via cost (if using Google Maps) or possibly rate limits
 
-## miss
-
-- did not finish fallback provider
-
 ## what I'd do next
 
 - get actual current-weather from noaa instead of placeholder (first found among grid points)
